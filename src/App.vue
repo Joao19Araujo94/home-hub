@@ -1,30 +1,36 @@
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
-  import LoginButton from './components/buttons/login-button.vue'
-  import LogoutButton from './components/buttons/logout-button.vue'
+  import { RouterView } from 'vue-router'
   import { useAuth0 } from "@auth0/auth0-vue";
+  import LoginButton from './components/buttons/login-button.vue'
+  import NavOption from './components/navbar/nav-option.vue'
+  import Navbar from './components/navbar/navbar.vue'
+  import NavUser from './components/navbar/nav-user.vue'
+  import Footer from './components/footer/footer.vue'
 
   const { isAuthenticated, user } = useAuth0();
-
   const isUserAdmin = () => {
     return user.value.profile ? user.value.profile.includes('admin') : false
   }
 </script>
 
 <template>
-  <div>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink v-if="isAuthenticated" to="/profile">Profile</RouterLink>
-      <template v-if="!isAuthenticated">
+  <Navbar>
+    <template v-if="isAuthenticated">
+      <NavOption path="/dashboard" text="Dashboard"/>
+      <NavOption path="/utilities" text="Utilities"/>
+      <NavOption path="/devices" text="Devices"/>
+      <NavUser/>
+    </template>
+    <template v-else>
+      <NavOption path="/" text="Home"/>
+      <NavOption path="/about" text="About"/>
+      <NavOption>
         <LoginButton />
-      </template>
-      <template v-if="isAuthenticated">
-        <RouterLink v-if="isAuthenticated && isUserAdmin()" to="/admin">Admin</RouterLink>
-        <LogoutButton />
-      </template>
-    </nav>
+      </NavOption>
+    </template>
+  </Navbar >
+  <div id="content" class="border" >
+    <RouterView />
   </div>
-  <RouterView />
+  <Footer/>
 </template>

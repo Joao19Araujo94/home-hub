@@ -13,5 +13,5 @@
 </script>
 
 <template>
-  <button type="button" class="rounded-full bg-green-200" @click="handleLogin()">Log In</button>
+  <button type="button" @click="handleLogin()">Log In</button>
 </template>
