@@ -18,7 +18,7 @@
     <Navbar>
       <template v-if="isAuthenticated">
         <NavOption path="/dashboard" text="Dashboard"/>
-        <NavOption path="/utilities" text="Utilities"/>
+        <NavOption path="/expenses" text="Expenses"/>
         <NavOption path="/devices" text="Devices"/>
         <NavUser/>
       </template>
