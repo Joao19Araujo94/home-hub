@@ -14,23 +14,25 @@
 </script>
 
 <template>
-  <Navbar>
-    <template v-if="isAuthenticated">
-      <NavOption path="/dashboard" text="Dashboard"/>
-      <NavOption path="/utilities" text="Utilities"/>
-      <NavOption path="/devices" text="Devices"/>
-      <NavUser/>
-    </template>
-    <template v-else>
-      <NavOption path="/" text="Home"/>
-      <NavOption path="/about" text="About"/>
-      <NavOption>
-        <LoginButton />
-      </NavOption>
-    </template>
-  </Navbar >
-  <div id="content" class="border" >
-    <RouterView />
+  <div class="relative min-h-screen">
+    <Navbar>
+      <template v-if="isAuthenticated">
+        <NavOption path="/dashboard" text="Dashboard"/>
+        <NavOption path="/utilities" text="Utilities"/>
+        <NavOption path="/devices" text="Devices"/>
+        <NavUser/>
+      </template>
+      <template v-else>
+        <NavOption path="/" text="Home"/>
+        <NavOption path="/about" text="About"/>
+        <NavOption>
+          <LoginButton />
+        </NavOption>
+      </template>
+    </Navbar >
+    <div id="content" class="border pb-10" >
+      <RouterView />
+    </div>
+    <Footer/>
   </div>
-  <Footer/>
 </template>
